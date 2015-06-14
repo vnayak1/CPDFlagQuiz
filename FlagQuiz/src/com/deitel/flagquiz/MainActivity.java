@@ -25,6 +25,7 @@ public class MainActivity extends Activity
    // keys for reading data from SharedPreferences
    public static final String CHOICES = "pref_numberOfChoices";
    public static final String REGIONS = "pref_regionsToInclude";
+   public static final String SCORE = "pref_scorelist";
 
    private boolean phoneDevice = true; // used to force portrait mode
    private boolean preferencesChanged = true; // did preferences change?

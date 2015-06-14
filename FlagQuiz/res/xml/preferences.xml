@@ -19,4 +19,15 @@
         android:title="@string/world_regions" 
         android:defaultValue="@array/regions_list"/>
 
+    
+       <MultiSelectListPreference
+        android:entries="@array/score_list"
+        android:entryValues="@array/score_list"
+        android:key="pref_scorelist"
+        android:persistent="true"
+
+        android:title="@string/number_of_score" 
+        android:defaultValue="@array/score_list"/>
+    
+    
 </PreferenceScreen>

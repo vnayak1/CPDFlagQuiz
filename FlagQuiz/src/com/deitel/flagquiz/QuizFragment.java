@@ -5,7 +5,9 @@ package com.deitel.flagquiz;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.SecureRandom;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -14,12 +16,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +42,15 @@ public class QuizFragment extends Fragment
    private static final String TAG = "FlagQuiz Activity";
 
    private static final int FLAGS_IN_QUIZ = 10; 
+   private static final Context c = null;
    private int try1=0;
    private int pointswon=0;
+   //String[] myIntArray = new String[5];
+   List<Integer> myIntArray = new ArrayList<Integer>();
+   
+   private SharedPreferences sharedPreferences;
+   private SharedPreferences.Editor sharedPreferencesedit;
+   
    private List<String> fileNameList; // flag file names
    private List<String> quizCountriesList; // countries in current quiz
    private Set<String> regionsSet; // world regions in current quiz
@@ -66,6 +77,9 @@ public class QuizFragment extends Fragment
       View view = 
          inflater.inflate(R.layout.fragment_quiz, container, false);
 
+      
+      
+      
       fileNameList = new ArrayList<String>();
       quizCountriesList = new ArrayList<String>();
       random = new SecureRandom(); 
@@ -328,6 +342,16 @@ public class QuizFragment extends Fragment
                            getResources().getString(R.string.results, 
                            totalGuesses, (1000 / (double) totalGuesses),try1,pointswon));
                         
+                       // Arrays.sort (myIntArray);
+                        
+                        
+                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());                  
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putInt("Name",10);
+                        editor.apply();
+                        
+
+                        
                         // "Reset Quiz" Button                              
                         builder.setPositiveButton(R.string.reset_quiz,
                            new DialogInterface.OnClickListener()                
@@ -362,8 +386,9 @@ public class QuizFragment extends Fragment
                         loadNextFlag();
                      }
                   }, 2000); // 2000 milliseconds for 2-second delay
-            } 
-         } 
+            }
+         }
+          
          else // guess was incorrect  
          {   
         	 
